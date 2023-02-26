@@ -1,5 +1,9 @@
 package es.mariaanasanz.proyecto6.simulador;
 
+import es.mariaanasanz.proyecto6.base.Comida;
+import es.mariaanasanz.proyecto6.base.Gema;
+import es.mariaanasanz.proyecto6.base.Jugador;
+import es.mariaanasanz.proyecto6.base.Zarigueya;
 import es.mariaanasanz.proyecto6.ejercicios.Estadisticas;
 import javafx.scene.input.KeyCode;
 
@@ -29,6 +33,11 @@ public class Simulador {
         Estadisticas estadisticas = new Estadisticas();
         capturarEventoTeclado(KeyCode.RIGHT);
         mostrarEventosTeclado();
-    }
+        objetoRecogido("jugador","gema");
+        objetoRecogido("zarigueya","comida");
+        objetoRecogido("zarigueya","comida");
+        objetoRecogido("zarigueya","comida");
 
+        mostrarObjetosRecogidos();
+    }
 }

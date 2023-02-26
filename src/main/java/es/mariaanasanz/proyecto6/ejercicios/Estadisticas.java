@@ -1,9 +1,12 @@
 package es.mariaanasanz.proyecto6.ejercicios;
 
+import es.mariaanasanz.proyecto6.base.Jugador;
+import es.mariaanasanz.proyecto6.base.Zarigueya;
 import javafx.scene.input.KeyCode;
 
 import java.util.*;
 
+@SuppressWarnings("removal")
 public class Estadisticas {
 
     private static LinkedHashMap<KeyCode, Integer> contadorEventosTeclado;
@@ -206,7 +209,7 @@ public class Estadisticas {
         else if ((countShift > countEscape) && (countShift > countElse)) {
             return KeyCode.SHIFT;
         }
-        else if (countEscape >= countElse) {
+        else if (countEscape > countElse) {
             return KeyCode.ESCAPE;
         }
         else if (countElse > countEscape){
@@ -226,8 +229,23 @@ public class Estadisticas {
      * @param objeto sera o la comida o la gema
      */
     public static void objetoRecogido(String actor, String objeto){
-        HashMap<String,Integer> recogido = new HashMap<String, Integer>();
-        recogido.put(objeto, recogido.get(objeto) + 1);
+        if (actor == null){
+            throw new NullPointerException("El actor no es válido");
+        }
+        if (objeto == null){
+            throw new NullPointerException("EL objeto no es válido");
+        }
+        HashMap<String,Integer> recogido = contadorObjetosRecogidos.get(actor);
+        if (recogido == null){
+            HashMap<String,Integer> tmp = new HashMap<String,Integer>();
+            contadorObjetosRecogidos.put(actor,tmp);
+        }
+        else if (recogido.get(objeto) == null){
+            recogido.put(objeto,new Integer(1));
+        }
+        else {
+            recogido.put(objeto, recogido.get(objeto) + 1);
+        }
         contadorObjetosRecogidos.put(actor,recogido);
     }
 
@@ -245,7 +263,60 @@ public class Estadisticas {
      * IMPORTANTE: Se debera emplear StringBuilder para construir la cadena a mostrar
      */
     public static void mostrarObjetosRecogidos(){
+        if (contadorObjetosRecogidos.isEmpty()){
+            System.err.println("No se ha recogido ningún objeto");
+            return;
+        }
+        Set<Map.Entry<String, HashMap<String, Integer>>> entradas = contadorObjetosRecogidos.entrySet();
+        StringBuilder sb = new StringBuilder("Objetos recogidos durante la partida:\n");
+        for (Map.Entry<String, HashMap<String, Integer>> entrada : entradas) {
 
+            if (entrada.getKey().equalsIgnoreCase("jugador")) {
+                sb.append("     - JUGADOR:\n");
+                if (entrada.getValue() == null){
+                    sb.append("         - El jugador no ha recogido objetos\n");
+                }
+                else {
+                    Set<Map.Entry<String, Integer>> entries = entrada.getValue().entrySet();
+                    for (Map.Entry<String,Integer> entry : entries) {
+                        if (entry.getKey().equalsIgnoreCase("comida")) {
+                            sb.append("         - comida: ");
+                        }
+                        if (entry.getKey().equalsIgnoreCase("gema")) {
+                            sb.append("         - gema: ");
+                        }
+                        if (entrada.getValue().get(entry.getKey()) == 1) {
+                            sb.append(entrada.getValue().get(entry.getKey())).append(" vez\n");
+                        } else {
+                            sb.append(entrada.getValue().get(entry.getKey())).append(" veces\n");
+                        }
+                    }
+                }
+            }
+            if (entrada.getKey().equalsIgnoreCase("zarigueya")) {
+                sb.append("     - ZARIGUEYA:\n");
+                if (entrada.getValue() == null){
+                    sb.append("         - La zarigueya no ha recogido objetos\n");
+                }
+                else{
+                    Set<Map.Entry<String, Integer>> entries = entrada.getValue().entrySet();
+                    for (Map.Entry<String,Integer> entry : entries) {
+                        if (entry.getKey().equalsIgnoreCase("comida")) {
+                            sb.append("         - comida: ");
+                        }
+                        if (entry.getKey().equalsIgnoreCase("gema")) {
+                            sb.append("         - gema: ");
+                        }
+                        if (entrada.getValue().get(entry.getKey()) == 1) {
+                            sb.append(entrada.getValue().get(entry.getKey())).append(" vez\n");
+                        } else {
+                            sb.append(entrada.getValue().get(entry.getKey())).append(" veces\n");
+                        }
+                    }
+                }
+            }
+        }
+        System.out.println(sb.toString());
     }
 
     /**
@@ -295,5 +366,9 @@ public class Estadisticas {
 
     public static LinkedHashMap<KeyCode, Integer> getContadorEventosTeclado() {
         return contadorEventosTeclado;
+    }
+
+    public static HashMap<String, HashMap<String, Integer>> getContadorObjetosRecogidos() {
+        return contadorObjetosRecogidos;
     }
 }

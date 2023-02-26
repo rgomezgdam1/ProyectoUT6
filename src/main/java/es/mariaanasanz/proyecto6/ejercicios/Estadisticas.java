@@ -2,15 +2,19 @@ package es.mariaanasanz.proyecto6.ejercicios;
 
 import javafx.scene.input.KeyCode;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
+import java.util.*;
 
 public class Estadisticas {
 
     private static LinkedHashMap<KeyCode, Integer> contadorEventosTeclado;
     private static HashMap<String, HashMap<String, Integer>> contadorObjetosRecogidos;
     private static ArrayList<Boolean> historicoDisparos;
+
+    public Estadisticas() {
+        contadorEventosTeclado = new LinkedHashMap<>();
+        contadorObjetosRecogidos = new HashMap<>();
+        historicoDisparos = new ArrayList<Boolean>();
+    }
 
     public static void mostrarEstadisticasSeguro(){
         try {
@@ -66,7 +70,18 @@ public class Estadisticas {
      * @param code el cogido de evento capturado
      */
     public static void capturarEventoTeclado(KeyCode code) {
-
+        switch (code){
+            case RIGHT: contadorEventosTeclado.put(KeyCode.RIGHT,new Integer(contadorEventosTeclado.size()));
+            break;
+            case LEFT: contadorEventosTeclado.put(KeyCode.LEFT,new Integer(contadorEventosTeclado.size()));
+            break;
+            case SHIFT: contadorEventosTeclado.put(KeyCode.SHIFT,new Integer(contadorEventosTeclado.size()));
+            break;
+            case ESCAPE: contadorEventosTeclado.put(KeyCode.ESCAPE,new Integer(contadorEventosTeclado.size()));
+            break;
+            default: contadorEventosTeclado.put(KeyCode.ASTERISK,new Integer(contadorEventosTeclado.size()));
+            break;
+        }
     }
 
     /**
@@ -83,6 +98,62 @@ public class Estadisticas {
      */
     public static void mostrarEventosTeclado(){
 
+        Set<Map.Entry<KeyCode, Integer>> entradas = contadorEventosTeclado.entrySet();
+        StringBuilder sb = new StringBuilder("Teclas pulsadas durante la partida:\n");
+
+        int countRight = 0;
+        int countLeft = 0;
+        int countShift = 0;
+        int countEscape = 0;
+        int countElse = 0;
+        for (Map.Entry<KeyCode, Integer> entrada : entradas) {
+            if (entrada.getKey().equals(KeyCode.RIGHT)){
+                countRight++;
+            }
+            else if (entrada.getKey().equals(KeyCode.LEFT)){
+                countLeft++;
+            }
+            else if (entrada.getKey().equals(KeyCode.SHIFT)){
+                countShift++;
+            }
+            else if (entrada.getKey().equals(KeyCode.ESCAPE)){
+                countEscape++;
+            }
+            else {
+                countElse++;
+            }
+        }
+        if (countRight == 1){
+            sb.append("     - RIGHT: ").append(countRight).append(" vez\n");
+        }
+        else {
+            sb.append("     - RIGHT: ").append(countRight).append(" veces\n");
+        }
+        if (countLeft == 1){
+            sb.append("     - LEFT: ").append(countLeft).append(" vez\n");
+        }
+        else {
+            sb.append("     - LEFT: ").append(countLeft).append(" veces\n");
+        }
+        if (countShift == 1){
+            sb.append("     - SHIFT: ").append(countShift).append(" vez\n");
+        }
+        else {
+            sb.append("     - SHIFT: ").append(countShift).append(" veces\n");
+        }
+        if (countEscape == 1){
+            sb.append("     - ESCAPE: ").append(countEscape).append(" vez\n");
+        }
+        else {
+            sb.append("     - ESCAPE: ").append(countEscape).append(" veces\n");
+        }
+        if (countElse == 1){
+            sb.append("     - OTROS: ").append(countElse).append(" vez\n");
+        }
+        else {
+            sb.append("     - OTROS: ").append(countElse).append(" veces\n");
+        }
+        System.out.println(sb.toString());
     }
 
     /**
@@ -167,5 +238,9 @@ public class Estadisticas {
      */
     public static void mostrarRatioPrecision(){
 
+    }
+
+    public static LinkedHashMap<KeyCode, Integer> getContadorEventosTeclado() {
+        return contadorEventosTeclado;
     }
 }

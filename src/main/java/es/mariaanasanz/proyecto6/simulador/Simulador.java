@@ -3,6 +3,8 @@ package es.mariaanasanz.proyecto6.simulador;
 import es.mariaanasanz.proyecto6.ejercicios.Estadisticas;
 import javafx.scene.input.KeyCode;
 
+import static es.mariaanasanz.proyecto6.ejercicios.Estadisticas.*;
+
 public class Simulador {
 
     /**
@@ -24,7 +26,9 @@ public class Simulador {
      *             numJoyaJugador numComidaZarigueya numJoyaZarigueya numDisparosCerteros numDisparosFallidos numDisparosCerterosBorrar numDisparosFallidosBorrar
      */
     public static void main(String[] args) {
-
+        Estadisticas estadisticas = new Estadisticas();
+        capturarEventoTeclado(KeyCode.RIGHT);
+        mostrarEventosTeclado();
     }
 
 }

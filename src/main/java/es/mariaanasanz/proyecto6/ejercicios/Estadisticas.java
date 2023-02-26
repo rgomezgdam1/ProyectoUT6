@@ -163,7 +163,48 @@ public class Estadisticas {
      * @return KeyCode mas frecuente
      */
     public static KeyCode teclaMasPulsada(){
-        return null;
+        Set<KeyCode> claves = contadorEventosTeclado.keySet();
+        if (claves.size() == 0){
+            return KeyCode.ESCAPE;
+        }
+        int countRight = 0;
+        int countLeft = 0;
+        int countShift = 0;
+        int countEscape = 0;
+        int countElse = 0;
+
+        for (KeyCode clave : claves) {
+            switch (clave){
+                case RIGHT: countRight++;
+                    break;
+                case LEFT: countLeft++;
+                    break;
+                case SHIFT: countShift++;
+                    break;
+                case ESCAPE: countEscape++;
+                    break;
+                case ASTERISK: countElse++;
+                    break;
+            }
+        }
+        if ((countRight > countLeft) && (countRight > countShift) && (countRight > countEscape) && (countRight > countElse)) {
+            return KeyCode.RIGHT;
+        }
+        else if ((countLeft > countShift) && (countLeft > countEscape) && (countLeft > countElse)) {
+            return KeyCode.LEFT;
+        }
+        else if ((countShift > countEscape) && (countShift > countElse)) {
+            return KeyCode.SHIFT;
+        }
+        else if (countEscape >= countElse) {
+            return KeyCode.ESCAPE;
+        }
+        else if (countElse > countEscape){
+            return KeyCode.ASTERISK;
+        }
+        else{
+            throw new NullPointerException("Dos teclas se han pulsado las mismas veces.");
+        }
     }
 
     /**

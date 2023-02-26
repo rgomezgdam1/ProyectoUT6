@@ -226,7 +226,9 @@ public class Estadisticas {
      * @param objeto sera o la comida o la gema
      */
     public static void objetoRecogido(String actor, String objeto){
-
+        HashMap<String,Integer> recogido = new HashMap<String, Integer>();
+        recogido.put(objeto, recogido.get(objeto) + 1);
+        contadorObjetosRecogidos.put(actor,recogido);
     }
 
     /**

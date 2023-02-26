@@ -70,17 +70,27 @@ public class Estadisticas {
      * @param code el cogido de evento capturado
      */
     public static void capturarEventoTeclado(KeyCode code) {
-        switch (code){
-            case RIGHT: contadorEventosTeclado.put(KeyCode.RIGHT,new Integer(contadorEventosTeclado.size()));
-            break;
-            case LEFT: contadorEventosTeclado.put(KeyCode.LEFT,new Integer(contadorEventosTeclado.size()));
-            break;
-            case SHIFT: contadorEventosTeclado.put(KeyCode.SHIFT,new Integer(contadorEventosTeclado.size()));
-            break;
-            case ESCAPE: contadorEventosTeclado.put(KeyCode.ESCAPE,new Integer(contadorEventosTeclado.size()));
-            break;
-            default: contadorEventosTeclado.put(KeyCode.ASTERISK,new Integer(contadorEventosTeclado.size()));
-            break;
+        if (code == null) {
+            throw new NullPointerException("No se ha pulsado una tecla válida");
+        }
+        else {
+            switch (code) {
+                case RIGHT:
+                    contadorEventosTeclado.put(KeyCode.RIGHT, new Integer(contadorEventosTeclado.size()));
+                    break;
+                case LEFT:
+                    contadorEventosTeclado.put(KeyCode.LEFT, new Integer(contadorEventosTeclado.size()));
+                    break;
+                case SHIFT:
+                    contadorEventosTeclado.put(KeyCode.SHIFT, new Integer(contadorEventosTeclado.size()));
+                    break;
+                case ESCAPE:
+                    contadorEventosTeclado.put(KeyCode.ESCAPE, new Integer(contadorEventosTeclado.size()));
+                    break;
+                default:
+                    contadorEventosTeclado.put(KeyCode.ASTERISK, new Integer(contadorEventosTeclado.size()));
+                    break;
+            }
         }
     }
 

@@ -32,6 +32,17 @@ public class Simulador {
     public static void main(String[] args) {
         Estadisticas estadisticas = new Estadisticas();
         capturarEventoTeclado(KeyCode.RIGHT);
+        capturarEventoTeclado(KeyCode.LEFT);
+        capturarEventoTeclado(KeyCode.ASTERISK);
+        capturarEventoTeclado(KeyCode.RIGHT);
+        capturarEventoTeclado(KeyCode.LEFT);
+        capturarEventoTeclado(KeyCode.SHIFT);
+        capturarEventoTeclado(KeyCode.RIGHT);
+        capturarEventoTeclado(KeyCode.LEFT);
+        capturarEventoTeclado(KeyCode.ASTERISK);
+        capturarEventoTeclado(KeyCode.SHIFT);
+        capturarEventoTeclado(KeyCode.LEFT);
+        capturarEventoTeclado(KeyCode.ESCAPE);
         mostrarEventosTeclado();
 
         objetoRecogido("jugador","gema");

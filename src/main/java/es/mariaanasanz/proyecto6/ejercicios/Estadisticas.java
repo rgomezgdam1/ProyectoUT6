@@ -78,20 +78,41 @@ public class Estadisticas {
         }
         else {
             switch (code) {
-                case RIGHT:
-                    contadorEventosTeclado.put(KeyCode.RIGHT, new Integer(contadorEventosTeclado.size()));
+                case RIGHT: Integer tmp = contadorEventosTeclado.get(KeyCode.RIGHT);
+                            if (tmp == null){
+                            tmp = new Integer(0);
+                            contadorEventosTeclado.put(KeyCode.RIGHT,tmp);
+                            }
+                            contadorEventosTeclado.put(KeyCode.RIGHT,tmp + 1);
                     break;
-                case LEFT:
-                    contadorEventosTeclado.put(KeyCode.LEFT, new Integer(contadorEventosTeclado.size()));
+                case LEFT:  Integer aux = contadorEventosTeclado.get(KeyCode.LEFT);
+                            if (aux == null){
+                            aux = new Integer(0);
+                            contadorEventosTeclado.put(KeyCode.LEFT,aux);
+                            }
+                            contadorEventosTeclado.put(KeyCode.LEFT,aux + 1);
                     break;
-                case SHIFT:
-                    contadorEventosTeclado.put(KeyCode.SHIFT, new Integer(contadorEventosTeclado.size()));
+                case SHIFT: Integer tmp1 = contadorEventosTeclado.get(KeyCode.SHIFT);
+                            if (tmp1 == null){
+                            tmp1 = new Integer(0);
+                            contadorEventosTeclado.put(KeyCode.SHIFT,tmp1);
+                                }
+                            contadorEventosTeclado.put(KeyCode.SHIFT,tmp1 + 1);
                     break;
-                case ESCAPE:
-                    contadorEventosTeclado.put(KeyCode.ESCAPE, new Integer(contadorEventosTeclado.size()));
-                    break;
+                case ESCAPE: Integer tmp2 = contadorEventosTeclado.get(KeyCode.ESCAPE);
+                             if (tmp2 == null){
+                             tmp2 = new Integer(0);
+                             contadorEventosTeclado.put(KeyCode.ESCAPE,tmp2);
+                                }
+                             contadorEventosTeclado.put(KeyCode.ESCAPE,tmp2 + 1);
+                            break;
                 default:
-                    contadorEventosTeclado.put(KeyCode.ASTERISK, new Integer(contadorEventosTeclado.size()));
+                            Integer tmp3 = contadorEventosTeclado.get(KeyCode.ASTERISK);
+                            if (tmp3 == null){
+                            tmp3 = new Integer(0);
+                            contadorEventosTeclado.put(KeyCode.ASTERISK,tmp3);
+                            }
+                            contadorEventosTeclado.put(KeyCode.ASTERISK,tmp3 + 1);
                     break;
             }
         }
@@ -111,7 +132,7 @@ public class Estadisticas {
      */
     public static void mostrarEventosTeclado(){
 
-        Set<Map.Entry<KeyCode, Integer>> entradas = contadorEventosTeclado.entrySet();
+/**/        Set<Map.Entry<KeyCode, Integer>> entradas = contadorEventosTeclado.entrySet();
         StringBuilder sb = new StringBuilder("Teclas pulsadas durante la partida:\n");
 
         int countRight = 0;
@@ -120,20 +141,18 @@ public class Estadisticas {
         int countEscape = 0;
         int countElse = 0;
         for (Map.Entry<KeyCode, Integer> entrada : entradas) {
-            if (entrada.getKey().equals(KeyCode.RIGHT)){
-                countRight++;
-            }
-            else if (entrada.getKey().equals(KeyCode.LEFT)){
-                countLeft++;
-            }
-            else if (entrada.getKey().equals(KeyCode.SHIFT)){
-                countShift++;
-            }
-            else if (entrada.getKey().equals(KeyCode.ESCAPE)){
-                countEscape++;
-            }
-            else {
-                countElse++;
+            for (int i = 0; i < entrada.getValue(); i++) {
+                if (entrada.getKey().equals(KeyCode.RIGHT)) {
+                    countRight++;
+                } else if (entrada.getKey().equals(KeyCode.LEFT)) {
+                    countLeft++;
+                } else if (entrada.getKey().equals(KeyCode.SHIFT)) {
+                    countShift++;
+                } else if (entrada.getKey().equals(KeyCode.ESCAPE)) {
+                    countEscape++;
+                } else {
+                    countElse++;
+                }
             }
         }
         if (countRight == 1){
@@ -328,8 +347,23 @@ public class Estadisticas {
      * IMPORTANTE: Se debera emplear StringBuilder para construir la cadena a mostrar
      */
     public static void mostrarQuienHaRecogidoMasObjetos(){
+        Collection<HashMap<String, Integer>> valores = contadorObjetosRecogidos.values();
+        if (valores.size() == 0){
+            throw new NullPointerException("No existen valores");
+        }
+        StringBuilder sb = new StringBuilder("Quien ha recogido mas objetos ha sido... ¡");
+        int objetosJugador = 0;
+        int objetosZarigueya = 0;
+        for (HashMap<String, Integer> valor : valores) {
+            Set<String> claves = valor.keySet();
+            for (String clave : claves) {
+                valor.get(clave);
 
-    }
+            }
+        }
+            throw new NullPointerException("Dos teclas se han pulsado las mismas veces.");
+        }
+
 
     /**
      * TODO: Se debera incluir al ArrayList historicoDisparos los disparos que se efectuen durante el juego (el orden SI importa) (6 puntos)

@@ -237,8 +237,9 @@ public class Estadisticas {
         }
         HashMap<String,Integer> recogido = contadorObjetosRecogidos.get(actor);
         if (recogido == null){
-            HashMap<String,Integer> tmp = new HashMap<String,Integer>();
-            contadorObjetosRecogidos.put(actor,tmp);
+            recogido = new HashMap<String,Integer>();
+            recogido.put(objeto,new Integer(1));
+            contadorObjetosRecogidos.put(actor,recogido);
         }
         else if (recogido.get(objeto) == null){
             recogido.put(objeto,new Integer(1));

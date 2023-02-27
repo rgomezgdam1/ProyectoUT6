@@ -33,9 +33,12 @@ public class Simulador {
         Estadisticas estadisticas = new Estadisticas();
         capturarEventoTeclado(KeyCode.RIGHT);
         mostrarEventosTeclado();
+
+        objetoRecogido("jugador","gema");
+        objetoRecogido("jugador","comida");
         objetoRecogido("jugador","gema");
         objetoRecogido("zarigueya","comida");
-        objetoRecogido("zarigueya","comida");
+        objetoRecogido("zarigueya","gema");
         objetoRecogido("zarigueya","comida");
 
         mostrarObjetosRecogidos();

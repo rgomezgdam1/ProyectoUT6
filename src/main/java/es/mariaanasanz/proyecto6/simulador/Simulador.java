@@ -30,7 +30,6 @@ public class Simulador {
      *             numJoyaJugador numComidaZarigueya numJoyaZarigueya numDisparosCerteros numDisparosFallidos numDisparosCerterosBorrar numDisparosFallidosBorrar
      */
     public static void main(String[] args) {
-        Estadisticas estadisticas = new Estadisticas();
         capturarEventoTeclado(KeyCode.RIGHT);
         capturarEventoTeclado(KeyCode.LEFT);
         capturarEventoTeclado(KeyCode.ASTERISK);
@@ -51,7 +50,9 @@ public class Simulador {
         objetoRecogido("zarigueya","comida");
         objetoRecogido("zarigueya","gema");
         objetoRecogido("zarigueya","comida");
+        objetoRecogido("zarigueya","comida");
 
         mostrarObjetosRecogidos();
+        mostrarQuienHaRecogidoMasObjetos();
     }
 }

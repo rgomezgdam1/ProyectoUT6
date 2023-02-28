@@ -402,6 +402,31 @@ public class Estadisticas {
      * IMPORTANTE: Se debera emplear StringBuilder para construir la cadena a mostrar
      */
     public static void mostrarRatioPrecision() {
+        int contadorAciertos = 0;
+        int contador = historicoDisparos.size();
+        StringBuilder sb = new StringBuilder("Tienes una precisión del ");
+        for (Boolean disparo:historicoDisparos) {
+            if (disparo) {
+                contadorAciertos++;
+            }
+        }
+        double precision = contadorAciertos / contador * 100;
+        sb.append(precision).append("%.\n");
+        if (precision >= 67){
+            sb.append(" ¡Eres insuperable!");
+        }
+        else if (precision >= 34) {
+            sb.append(" No está nada mal");
+        }
+        else {
+            sb.append(" Deberías entrenar un poco más");
+        }
+    }
 
+    /**
+    * TODO: Extra, averiguar los pájaros que se han escapado
+    * */
+    public static boolean pajaroEscapado(){
+        return false;
     }
 }

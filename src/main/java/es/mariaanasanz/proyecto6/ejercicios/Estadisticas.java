@@ -219,18 +219,14 @@ public class Estadisticas {
                     break;
             }
         }
-        if ((countRight > countLeft) && (countRight > countShift) && (countRight > countEscape) && (countRight > countElse)) {
+        if ((countRight >= countLeft) && (countRight >= countShift) && (countRight >= countEscape) && (countRight >= countElse)) {
             return KeyCode.RIGHT;
-        } else if ((countLeft > countShift) && (countLeft > countEscape) && (countLeft > countElse)) {
+        } else if ((countLeft >= countShift) && (countLeft >= countEscape) && (countLeft >= countElse)) {
             return KeyCode.LEFT;
-        } else if ((countShift > countEscape) && (countShift > countElse)) {
+        } else if ((countShift >= countEscape) && (countShift >= countElse)) {
             return KeyCode.SHIFT;
-        } else if (countEscape > countElse) {
-            return KeyCode.ESCAPE;
-        } else if (countElse > countEscape) {
-            return KeyCode.ASTERISK;
         } else {
-            throw new NullPointerException("Dos teclas se han pulsado las mismas veces.");
+            return KeyCode.ASTERISK;
         }
     }
 
@@ -376,7 +372,12 @@ public class Estadisticas {
      * @param exito representa si el disparo es certero (true) o fallido (false)
      */
     public static void capturarDisparo(boolean exito) {
-        historicoDisparos.add(new Boolean(exito));
+        if (exito){
+            historicoDisparos.add(Boolean.TRUE);
+        }
+        else {
+           historicoDisparos.add(Boolean.FALSE);
+        }
     }
 
     /**
@@ -387,8 +388,15 @@ public class Estadisticas {
      * @param exito representa si el disparo es certero (true) o fallido (false)
      */
     public static void borrarDisparo(boolean exito) {
-        int indice = historicoDisparos.lastIndexOf(new Boolean(exito));
-        historicoDisparos.remove(indice);
+        if (historicoDisparos.isEmpty()){
+            System.out.println("No se ha disparado");
+        } else if (! historicoDisparos.contains(exito)) {
+            System.out.println("No se han acertado disparos");
+        }
+        else{
+            int indice = historicoDisparos.lastIndexOf(new Boolean(exito));
+            historicoDisparos.remove(indice);
+        }
     }
 
     /**
@@ -402,27 +410,31 @@ public class Estadisticas {
      * IMPORTANTE: Se debera emplear StringBuilder para construir la cadena a mostrar
      */
     public static void mostrarRatioPrecision() {
-        int contadorAciertos = 0;
-        int contador = historicoDisparos.size();
-        StringBuilder sb = new StringBuilder("Tienes una precisión del ");
-        for (Boolean disparo:historicoDisparos) {
-            if (disparo) {
-                contadorAciertos++;
+        StringBuilder sb = new StringBuilder("");
+        if (historicoDisparos.isEmpty()) {
+            sb.append("No se ha disparado");
+        }
+        else{
+            int contadorAciertos = 0;
+            int contador = historicoDisparos.size();
+             sb.append("Tienes una precisión del ");
+            for (Boolean disparo : historicoDisparos) {
+                if (disparo) {
+                    contadorAciertos++;
+                }
+            }
+            int precision = (contadorAciertos * 100 / contador);
+            sb.append(precision).append("%.\n");
+            if (precision >= 67) {
+                sb.append("¡Eres insuperable!");
+            } else if (precision >= 34) {
+                sb.append("No está nada mal");
+            } else {
+                sb.append("Deberías entrenar un poco más");
             }
         }
-        double precision = contadorAciertos / contador * 100;
-        sb.append(precision).append("%.\n");
-        if (precision >= 67){
-            sb.append(" ¡Eres insuperable!");
-        }
-        else if (precision >= 34) {
-            sb.append(" No está nada mal");
-        }
-        else {
-            sb.append(" Deberías entrenar un poco más");
-        }
+        System.out.println(sb.toString());
     }
-
     /**
     * TODO: Extra, averiguar los pájaros que se han escapado
     * */

@@ -2,6 +2,7 @@ package es.mariaanasanz.proyecto6.ejercicios;
 
 import es.mariaanasanz.proyecto6.base.Jugador;
 import es.mariaanasanz.proyecto6.base.Zarigueya;
+import es.mariaanasanz.proyecto6.base.Enemigo;
 import javafx.scene.input.KeyCode;
 
 import java.util.*;
@@ -225,7 +226,10 @@ public class Estadisticas {
             return KeyCode.LEFT;
         } else if ((countShift >= countEscape) && (countShift >= countElse)) {
             return KeyCode.SHIFT;
-        } else {
+        } else if (countEscape >= countElse){
+            return KeyCode.ESCAPE;
+        }
+        else{
             return KeyCode.ASTERISK;
         }
     }
@@ -330,14 +334,12 @@ public class Estadisticas {
             if (clave.equalsIgnoreCase("jugador")){
                 Iterator<Integer> iterador = contadorObjetosRecogidos.get("jugador").values().iterator();
                 if (iterador.hasNext()){
-                objetosJugador += iterador.next();
-                objetosJugador += iterador.next();
+                    objetosJugador += iterador.next();
                 }
             }
             if (clave.equalsIgnoreCase("zarigueya")){
                 Iterator<Integer> iterador = contadorObjetosRecogidos.get("zarigueya").values().iterator();
                 if (iterador.hasNext()) {
-                    objetosZarigueya += iterador.next();
                     objetosZarigueya += iterador.next();
                 }
             }
@@ -437,8 +439,20 @@ public class Estadisticas {
     }
     /**
     * TODO: Extra, averiguar los pájaros que se han escapado
-    * */
+    *
     public static boolean pajaroEscapado(){
-        return false;
+        Enemigo pajaro = new Enemigo(800,600,390);
+        return pajaro.getX() < 0;
     }
+    public static int cuantosPajarosEscapados(){
+        int contador = 0;
+        if(pajaroEscapado()){
+            contador++;
+        }
+        return contador;
+    }
+
+    public static void mostrarPajarosEscapados(){
+        System.out.println("Se han escapado un total de: " + cuantosPajarosEscapados());
+    }*/
 }

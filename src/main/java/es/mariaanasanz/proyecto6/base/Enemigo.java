@@ -1,8 +1,10 @@
 package es.mariaanasanz.proyecto6.base;
 
 import javafx.scene.image.Image;
+/*
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+*/
 import javafx.scene.shape.Circle;
 
 import java.io.File;
@@ -52,7 +54,8 @@ public class Enemigo extends Entidad
     }
 
     @Override
-    public void posicionar(){
+    public void
+    posicionar(){
         Random rnd = new Random();
         posicionInicialY = rnd.nextInt((int)altoDeLaEscena/2);
         setY(posicionInicialY);
@@ -63,8 +66,10 @@ public class Enemigo extends Entidad
     public void inicializarMedios(){
         try {
             spriteIdle = new Image(Files.newInputStream(Path.of(RUTA_SPRITE_IDLE)));
+            /*
             sonido = new Media(new File(RUTA_SONIDO_AGUILA).toURI().toString());
             reproductorSonido = new MediaPlayer(sonido);
+            */
         } catch (Exception e) {
             System.out.println("ALGO NO HA IDO BIEN");
             e.printStackTrace();
@@ -76,7 +81,7 @@ public class Enemigo extends Entidad
             disparado = true;
             try{
                 spriteMuerte = new Image(Files.newInputStream(Path.of(RUTA_SPRITE_MUERTE)));
-                reproductorSonido.play();
+                //reproductorSonido.play();
             }catch(Exception e){
                 e.printStackTrace();
             }

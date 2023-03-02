@@ -1,9 +1,10 @@
 package es.mariaanasanz.proyecto6.base;
 
 import javafx.scene.image.Image;
+/*
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-
+*/
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -41,7 +42,9 @@ public class Zarigueya extends Entidad
     public void inicializarMedios(){
         try {
             spriteIdle = new Image(Files.newInputStream(Path.of(RUTA_SPRITE_IDLE)));
+            /*
             sonido = new Media(new File(RUTA_SONIDO_ZARIGUEYA).toURI().toString());
+            */
         } catch (Exception e) {
             System.out.println("ALGO NO HA IDO BIEN");
         }
@@ -53,7 +56,7 @@ public class Zarigueya extends Entidad
             valorDeRetorno = true;
             objeto.setImage(null);
             try{
-                new MediaPlayer(sonido).play();
+                //new MediaPlayer(sonido).play();
             }catch(Exception e){
                 e.printStackTrace();
             }

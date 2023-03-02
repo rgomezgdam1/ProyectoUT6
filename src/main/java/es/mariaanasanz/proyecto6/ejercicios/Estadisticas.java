@@ -70,7 +70,7 @@ public class Estadisticas {
      */
     public static void capturarEventoTeclado(KeyCode code) {
         if (code == null) {
-            throw new NullPointerException("No se ha pulsado una tecla válida");
+            System.out.println("No se ha pulsado una tecla válida");
         } else {
             switch (code) {
                 case RIGHT:
@@ -245,10 +245,10 @@ public class Estadisticas {
      */
     public static void objetoRecogido(String actor, String objeto) {
         if (actor == null) {
-            throw new NullPointerException("El actor no es válido");
+            System.out.println("El actor no es válido");
         }
         if (objeto == null) {
-            throw new NullPointerException("EL objeto no es válido");
+            System.out.println("EL objeto no es válido");
         }
         HashMap<String, Integer> recogido = contadorObjetosRecogidos.get(actor);
         if (recogido == null) {
@@ -325,7 +325,7 @@ public class Estadisticas {
     public static void mostrarQuienHaRecogidoMasObjetos() {
         Set<String> claves = contadorObjetosRecogidos.keySet();
         if (claves.size() == 0) {
-            throw new NullPointerException("No existen valores");
+            System.err.println("No existen valores");
         }
         StringBuilder sb = new StringBuilder("Quien ha recogido mas objetos ha sido... ¡");
         int objetosJugador = 0;

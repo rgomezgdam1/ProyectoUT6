@@ -59,6 +59,8 @@ public class Juego extends Application {
     private ArrayList<Objeto> objetos;
     private int contadorMilisegundos, puntuacion;
     private long contadorSegundos;
+
+
     /*;
     private Media musicaAmbiente;
     private Media sonidoDisparo;
@@ -152,6 +154,9 @@ public class Juego extends Application {
                     while(iteradorEnemigos.hasNext()){
                         Enemigo enemigo = iteradorEnemigos.next();
                         enemigo.actualizar();
+                        /**if (enemigo.getVida() && enemigo.getX() < 0){
+                            Estadisticas.capturarPajaroEscapado(Boolean.TRUE);
+                        }*/
                         if(enemigo.getVida() && enemigo.disparadoPor(disparo)){
                             Estadisticas.borrarDisparo(false);
                             Estadisticas.capturarDisparo(true);
@@ -257,4 +262,5 @@ public class Juego extends Application {
         */
         primaryStage.show();
     }
+
 }

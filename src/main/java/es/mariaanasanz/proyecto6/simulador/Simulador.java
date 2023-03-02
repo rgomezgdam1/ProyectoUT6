@@ -89,6 +89,5 @@ public class Simulador {
         mostrarObjetosRecogidos();
         mostrarQuienHaRecogidoMasObjetos();
         mostrarRatioPrecision();
-        //mostrarPajarosEscapados();
     }
 }

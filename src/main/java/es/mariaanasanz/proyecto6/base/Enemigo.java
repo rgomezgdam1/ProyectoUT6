@@ -1,5 +1,5 @@
 package es.mariaanasanz.proyecto6.base;
-
+import es.mariaanasanz.proyecto6.ejercicios.Estadisticas;
 import javafx.scene.image.Image;
 /*
 import javafx.scene.media.Media;
@@ -23,6 +23,7 @@ public class Enemigo extends Entidad
     private static final int MARGEN_MOVIMIENTO = 15;
     private Image spriteMuerte;
     private boolean disparado;
+
     private int actualizacionesMuerto, posicionInicialY, velocidadY;
     
     public Enemigo(float anchoDeLaEscena, float altoDeLaEscena, int distanciaAlSuelo)
@@ -40,6 +41,9 @@ public class Enemigo extends Entidad
         setY(getY()+ velocidadY);
         if(getY() >= posicionInicialY + MARGEN_MOVIMIENTO || getY() <= posicionInicialY - MARGEN_MOVIMIENTO){
             velocidadY *= -1;
+        }
+        if (getX() < 0){
+            Estadisticas.capturarPajaroEscapado(Boolean.TRUE);
         }
         if(getX() < -DISTANCIA_PARA_REINICIAR_MOVIMIENTO){
             posicionar();
@@ -93,4 +97,5 @@ public class Enemigo extends Entidad
     public boolean getVida(){
         return !disparado;
     }
+
 }

@@ -4,7 +4,8 @@ import es.mariaanasanz.proyecto6.base.Jugador;
 import es.mariaanasanz.proyecto6.base.Zarigueya;
 import es.mariaanasanz.proyecto6.base.Enemigo;
 import javafx.scene.input.KeyCode;
-
+import javafx.scene.image.Image;
+import javafx.scene.shape.Circle;
 import java.util.*;
 
 @SuppressWarnings("removal")
@@ -13,6 +14,8 @@ public class Estadisticas {
     private static LinkedHashMap<KeyCode, Integer> contadorEventosTeclado = new LinkedHashMap<KeyCode, Integer>();
     private static HashMap<String, HashMap<String, Integer>> contadorObjetosRecogidos = new HashMap<String,HashMap<String,Integer>>();
     private static ArrayList<Boolean> historicoDisparos = new ArrayList<Boolean>();
+
+    private static ArrayList<Boolean> pajarosEscapados = new ArrayList<Boolean>();
 
 
     public static void mostrarEstadisticasSeguro() {
@@ -30,6 +33,8 @@ public class Estadisticas {
             mostrarQuienHaRecogidoMasObjetos();
             System.out.println("****************************************");
             mostrarRatioPrecision();
+            System.out.println("****************************************");
+            mostrarPajarosEscapados();
             System.out.println("****************************************");
         } catch (Exception e) {
             e.printStackTrace();
@@ -331,16 +336,16 @@ public class Estadisticas {
         int objetosJugador = 0;
         int objetosZarigueya = 0;
         for (String clave : claves) {
-            if (clave.equalsIgnoreCase("jugador")){
-                Iterator<Integer> iterador = contadorObjetosRecogidos.get("jugador").values().iterator();
-                if (iterador.hasNext()){
-                    objetosJugador += iterador.next();
+            if (clave.equals("jugador")){
+                Collection<Integer> tmp = contadorObjetosRecogidos.get("jugador").values();
+                for (Integer integer : tmp) {
+                    objetosJugador += integer.intValue();
+                    }
                 }
-            }
-            if (clave.equalsIgnoreCase("zarigueya")){
-                Iterator<Integer> iterador = contadorObjetosRecogidos.get("zarigueya").values().iterator();
-                if (iterador.hasNext()) {
-                    objetosZarigueya += iterador.next();
+            if (clave.equals("zarigueya")){
+                Collection<Integer> aux = contadorObjetosRecogidos.get("zarigueya").values();
+                for (Integer integer : aux) {
+                    objetosZarigueya += integer.intValue();
                 }
             }
         }
@@ -353,14 +358,19 @@ public class Estadisticas {
         }
         else if (objetosJugador > objetosZarigueya){
             if (objetosJugador == 1){
-            sb.append("JUGADOR! con un total de ").append(objetosZarigueya).append(" objeto.");
+            sb.append("JUGADOR! con un total de ").append(objetosJugador).append(" objeto.");
             }
             else {
-                sb.append("JUGADOR! con un total de ").append(objetosZarigueya).append(" objetos.");
+                sb.append("JUGADOR! con un total de ").append(objetosJugador).append(" objetos.");
             }
         }
         else {
-        throw new NullPointerException("Ambos actores tienen los mismos objetos.");
+            if (objetosJugador == 1){
+                sb.append("EMPATE!, JUGADOR Y ZARIGUEYA con un total de ").append(objetosJugador).append(" objeto cada uno.");
+            }
+            else {
+            sb.append("EMPATE!, JUGADOR Y ZARIGUEYA con un total de ").append(objetosJugador).append(" objetos cada uno.");
+            }
         }
         System.out.println(sb.toString());
     }
@@ -439,20 +449,34 @@ public class Estadisticas {
     }
     /**
     * TODO: Extra, averiguar los pájaros que se han escapado
-    *
-    public static boolean pajaroEscapado(){
-        Enemigo pajaro = new Enemigo(800,600,390);
-        return pajaro.getX() < 0;
-    }
-    public static int cuantosPajarosEscapados(){
-        int contador = 0;
-        if(pajaroEscapado()){
-            contador++;
+    **/
+    public static void capturarPajaroEscapado(boolean escapado){
+        if (escapado){
+            pajarosEscapados.add(Boolean.TRUE);
         }
-        return contador;
+        else {
+            pajarosEscapados.add(Boolean.FALSE);
+        }
     }
 
     public static void mostrarPajarosEscapados(){
-        System.out.println("Se han escapado un total de: " + cuantosPajarosEscapados());
-    }*/
+        int contador = 0;
+        StringBuilder sb = new StringBuilder("");
+        for (Boolean pajaro:pajarosEscapados) {
+            if (pajaro){
+                contador++;
+            }
+        }
+        if (contador == 0){
+            sb.append("Enhorabuena, no se ha escapado ningún enemigo");
+        }
+        else if (contador == 1) {
+            sb.append("Se han escapado " + contador + "enemigo");
+        }
+        else {
+            sb.append("Se han escapado " + contador + "enemigos");
+        }
+        System.out.println(sb.toString());
+    }
 }
+

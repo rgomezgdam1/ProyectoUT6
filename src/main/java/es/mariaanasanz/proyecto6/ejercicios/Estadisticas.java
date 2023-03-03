@@ -1,5 +1,6 @@
 package es.mariaanasanz.proyecto6.ejercicios;
 
+import es.mariaanasanz.proyecto6.base.Juego;
 import es.mariaanasanz.proyecto6.base.Jugador;
 import es.mariaanasanz.proyecto6.base.Zarigueya;
 import es.mariaanasanz.proyecto6.base.Enemigo;
@@ -15,7 +16,7 @@ public class Estadisticas {
     private static HashMap<String, HashMap<String, Integer>> contadorObjetosRecogidos = new HashMap<String,HashMap<String,Integer>>();
     private static ArrayList<Boolean> historicoDisparos = new ArrayList<Boolean>();
 
-    private static ArrayList<Boolean> pajarosEscapados = new ArrayList<Boolean>();
+    private static ArrayList<Enemigo> pajarosEscapados = new ArrayList<Enemigo>();
 
 
     public static void mostrarEstadisticasSeguro() {
@@ -34,8 +35,7 @@ public class Estadisticas {
             System.out.println("****************************************");
             mostrarRatioPrecision();
             System.out.println("****************************************");
-            mostrarPajarosEscapados();
-            System.out.println("****************************************");
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -450,31 +450,19 @@ public class Estadisticas {
     /**
     * TODO: Extra, averiguar los pájaros que se han escapado
     **/
-    public static void capturarPajaroEscapado(boolean escapado){
-        if (escapado){
-            pajarosEscapados.add(Boolean.TRUE);
-        }
-        else {
-            pajarosEscapados.add(Boolean.FALSE);
-        }
-    }
+    public static void cuantosPajarosEscapados(ArrayList<Enemigo> enemigos){
+        int pajarosVivos = enemigos.size();
 
-    public static void mostrarPajarosEscapados(){
-        int contador = 0;
         StringBuilder sb = new StringBuilder("");
-        for (Boolean pajaro:pajarosEscapados) {
-            if (pajaro){
-                contador++;
-            }
-        }
-        if (contador == 0){
+
+        if (pajarosVivos == 0){
             sb.append("Enhorabuena, no se ha escapado ningún enemigo");
         }
-        else if (contador == 1) {
-            sb.append("Se han escapado " + contador + "enemigo");
+        else if (pajarosVivos == 1) {
+            sb.append("Se ha escapado ").append("un").append(" enemigo");
         }
         else {
-            sb.append("Se han escapado " + contador + "enemigos");
+            sb.append("Se han escapado ").append(pajarosVivos).append(" enemigos");
         }
         System.out.println(sb.toString());
     }

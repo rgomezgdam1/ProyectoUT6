@@ -75,6 +75,8 @@ public class Juego extends Application {
     @Override
     public void stop() throws Exception {
         Estadisticas.mostrarEstadisticasSeguro();
+        Estadisticas.cuantosPajarosEscapados(enemigos);
+        System.out.println("****************************************");
         System.exit(0);
     }
 
@@ -165,9 +167,6 @@ public class Juego extends Application {
                             gema.fijarPosicion(enemigo.getX()+enemigo.getBoundsInParent().getWidth()/2, enemigo.getY()+enemigo.getBoundsInParent().getWidth()/2);
                             objetos.add(gema);
                             panel.getChildren().add(gema);
-                        }
-                        if (enemigo.getImage() == null && enemigo.getX() < 0){
-                            Estadisticas.capturarPajaroEscapado(Boolean.TRUE);
                         }
                         if(enemigo.getImage() == null){
                             panel.getChildren().remove(enemigo);
@@ -265,5 +264,7 @@ public class Juego extends Application {
         */
         primaryStage.show();
     }
-
+        public int getEnemigos(){
+        return enemigos.size();
+        }
 }

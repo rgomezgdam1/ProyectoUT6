@@ -166,6 +166,9 @@ public class Juego extends Application {
                             objetos.add(gema);
                             panel.getChildren().add(gema);
                         }
+                        if (enemigo.getImage() == null && enemigo.getX() < 0){
+                            Estadisticas.capturarPajaroEscapado(Boolean.TRUE);
+                        }
                         if(enemigo.getImage() == null){
                             panel.getChildren().remove(enemigo);
                             iteradorEnemigos.remove();

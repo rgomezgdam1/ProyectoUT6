@@ -42,9 +42,9 @@ public class Enemigo extends Entidad
         if(getY() >= posicionInicialY + MARGEN_MOVIMIENTO || getY() <= posicionInicialY - MARGEN_MOVIMIENTO){
             velocidadY *= -1;
         }
-        if (getX() < 0){
-            Estadisticas.capturarPajaroEscapado(Boolean.TRUE);
-        }
+        /**if (getVida() && getX() < 0){
+
+        }*/
         if(getX() < -DISTANCIA_PARA_REINICIAR_MOVIMIENTO){
             posicionar();
         }

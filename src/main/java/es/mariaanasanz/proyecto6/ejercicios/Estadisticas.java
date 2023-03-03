@@ -336,13 +336,13 @@ public class Estadisticas {
         int objetosJugador = 0;
         int objetosZarigueya = 0;
         for (String clave : claves) {
-            if (clave.equals("jugador")){
+            if (clave.equalsIgnoreCase("jugador")){
                 Collection<Integer> tmp = contadorObjetosRecogidos.get("jugador").values();
                 for (Integer integer : tmp) {
                     objetosJugador += integer.intValue();
                     }
                 }
-            if (clave.equals("zarigueya")){
+            if (clave.equalsIgnoreCase("zarigueya")){
                 Collection<Integer> aux = contadorObjetosRecogidos.get("zarigueya").values();
                 for (Integer integer : aux) {
                     objetosZarigueya += integer.intValue();

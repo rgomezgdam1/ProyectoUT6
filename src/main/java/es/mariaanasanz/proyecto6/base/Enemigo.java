@@ -1,5 +1,4 @@
 package es.mariaanasanz.proyecto6.base;
-import es.mariaanasanz.proyecto6.ejercicios.Estadisticas;
 import javafx.scene.image.Image;
 /*
 import javafx.scene.media.Media;
@@ -42,9 +41,6 @@ public class Enemigo extends Entidad
         if(getY() >= posicionInicialY + MARGEN_MOVIMIENTO || getY() <= posicionInicialY - MARGEN_MOVIMIENTO){
             velocidadY *= -1;
         }
-        /**if (getVida() && getX() < 0){
-
-        }*/
         if(getX() < -DISTANCIA_PARA_REINICIAR_MOVIMIENTO){
             posicionar();
         }

@@ -1,12 +1,11 @@
 package es.mariaanasanz.proyecto6.simulador;
 
-import es.mariaanasanz.proyecto6.base.Comida;
-import es.mariaanasanz.proyecto6.base.Gema;
-import es.mariaanasanz.proyecto6.base.Jugador;
-import es.mariaanasanz.proyecto6.base.Zarigueya;
+import es.mariaanasanz.proyecto6.base.*;
 import es.mariaanasanz.proyecto6.ejercicios.Estadisticas;
 import javafx.scene.input.KeyCode;
+import es.mariaanasanz.proyecto6.base.Enemigo;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
@@ -32,20 +31,7 @@ public class Simulador {
      * @param args numFlechasIzquierda numFlechasDerecha numShift numEscape numOtrasTeclas numComidaJugador
      *             numJoyaJugador numComidaZarigueya numJoyaZarigueya numDisparosCerteros numDisparosFallidos numDisparosCerterosBorrar numDisparosFallidosBorrar
      */
-    public static void main(String[] args) { // 2, 34, 3, 5, 6, 7, 8, 9, 10, 8, 9, 1, 4
-    /**
-        Random rnd = new Random();
-        int i = 0;
-        while (Arrays.stream(eventos).sum() > 0 && i!=3){
-            i = rnd.nextInt(13);
-            if (eventos[i] > 0) {
-                eventos[i]--;
-                hazAccion(i);
-            }
-        }
-    }
-    private static void hazAccion(int i) {
-        switch (i) */
+    public static void main(String[] args) { // 2, 34, 3, 5, 6, 7, 8, 9, 10, 8, 9, 1, 4, 10
         int[] eventos = new int[13];
         for (int i = 0; i < eventos.length; i++) {
             eventos[i] = Integer.parseInt(args[i]);

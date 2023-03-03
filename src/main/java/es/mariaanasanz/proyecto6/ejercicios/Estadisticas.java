@@ -449,7 +449,7 @@ public class Estadisticas {
     }
     /**
     * TODO: Extra, averiguar los pájaros que se han escapado
-    **/
+    */
     public static void cuantosPajarosEscapados(ArrayList<Enemigo> enemigos){
         int pajarosVivos = enemigos.size();
 
